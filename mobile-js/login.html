@@ -1,48 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	
-	<script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
-</head>
-<body>
-		
-		<div class="form-group" style="width:67%;">
-		<div>
-			<input type="text" class="form-control" id="phone_num" required placeholder="Mobile number" />
-		</div>
-		<div style="margin: 5px;">
-	<button type="button" class="btn btn-warning btn-block btn-lg" onclick="phone_btn_onclick()">
-	 <i class="fa fa-maxcdn" ></i>obile</button>
-		</div>
-		</div>
-		<script>
-			
-			  // initialize Account Kit with CSRF protection
-			  AccountKit_OnInteractive = function(){
-			    AccountKit.init(
-			      {
-			        appId:"151584375309760", 
-			        state:"csrf", 
-			        version:"v1.0"
-			      }
-			    );
-			  };
+< !DOCTYPE html >
+    <html>
+        <head>
+            <title></title>
+
+            <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+        </head>
+        <body>
+
+            <div class="form-group" style="width:67%;">
+                <div>
+                    <input type="text" class="form-control" id="phone_num" required placeholder="Mobile number" />
+                </div>
+                <div style="margin: 5px;">
+                    <button type="button" class="btn btn-warning btn-block btn-lg" onclick="phone_btn_onclick()">
+                        <i class="fa fa-maxcdn" ></i>obile</button>
+                </div>
+            </div>
+            <script>
+
+                // initialize Account Kit with CSRF protection
+                AccountKit_OnInteractive = function(){
+                    AccountKit.init(
+                        {
+                            appId: "151584375309760",
+                            state: "csrf",
+                            version: "v1.0"
+                        }
+                    );
+                };
 
 			  // login callback
 			  function loginCallback(response) {
-			    console.log(response);
-			    if (response.status === "PARTIALLY_AUTHENTICATED") {
+                    console.log(response);
+                if (response.status === "PARTIALLY_AUTHENTICATED") {
 			    		var name = document.getElementById("phone_num").value;
 			    		var id = document.getElementById("phone_num").value;
-			    		
+
 			    			    $.ajax({
-					        type: 'POST',
+                    type: 'POST',
 					        url: 'data.php',
-					        data: { name: name, id: id },
+					        data: {name: name, id: id },
 					        success: function(data) {
-									window.location.href = '/pucho/wall.php';
-									}
+                    window.location.href = '/pucho/wall.php';
+                }
 
 			    });
 			      /*document.getElementById("code").value = response.code;
@@ -50,12 +50,12 @@
 			      document.getElementById("my_form").submit();*/
 			    }
 			    else if (response.status === "NOT_AUTHENTICATED") {
-			      // handle authentication failure
-			    }
-			    else if (response.status === "BAD_PARAMS") {
-			      // handle bad parameters
-			    }
-			  }
+                    // handle authentication failure
+                }
+                else if (response.status === "BAD_PARAMS") {
+                    // handle bad parameters
+                }
+                }
 
 			  // phone form submission handler
 
@@ -63,17 +63,17 @@
 			  	var country_code = '+91';
 			    var ph_num = document.getElementById("phone_num").value;
 			    if (ph_num) {
-			  AccountKit.login('PHONE', 
-     					 {countryCode: country_code, phoneNumber: ph_num}, // will use default values if 
-      						loginCallback);
-			      
-			  }
-			
+                    AccountKit.login('PHONE',
+                        { countryCode: country_code, phoneNumber: ph_num }, // will use default values if 
+                        loginCallback);
+
+                }
+
 			else{
-				alert('Phone no ')
-			}
-		}	
+                    alert('Phone no ')
+                }
+                }
 		</script>
 
-</body>
-</html>
+        </body>
+    </html>
